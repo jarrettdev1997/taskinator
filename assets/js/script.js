@@ -5,6 +5,8 @@ var pageContentEl = document.querySelector("#page-content");
 var tasksInProgressEl = document.querySelector("#tasks-in-progress");
 var tasksCompletedEl = document.querySelector("#tasks-completed");
 
+var tasks = [];
+
 var taskFormHandler = function (event) {
 
     event.preventDefault();
@@ -31,7 +33,8 @@ var taskFormHandler = function (event) {
     else {
     var taskDataObj = {
       name: taskNameInput,
-      type: taskTypeInput
+      type: taskTypeInput,
+      status: "to do"
     };
   
     createTaskEl(taskDataObj);
@@ -67,6 +70,10 @@ taskInfoEl.innerHTML = "<h3 class='task-name'>" + taskDataObj.name + "</h3><span
 
 listItemEl.appendChild(taskInfoEl);
 
+taskDataObj.id = taskIdCounter;
+
+tasks.push(taskDataObj);
+
 var taskActionsEl = createTaskActions(taskIdCounter);
 listItemEl.appendChild(taskActionsEl);
 
@@ -76,6 +83,9 @@ tasksToDoEl.appendChild(listItemEl);
 // Increase task counter for next unique id
 taskIdCounter++;
 
+
+console.log(taskDataObj);
+console.log(taskDataObj.status);
 };
 
 var createTaskActions = function(taskId) {
